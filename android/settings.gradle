@@ -1,0 +1,3 @@
+rootProject.name = 'g26ios'
+
+include ':app'
