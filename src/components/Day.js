@@ -1,14 +1,16 @@
-import React, {Component} from 'react';
-import classNames from 'classnames';
-import { connect } from 'react-redux';
+import React from 'react-native';
+import { connect } from 'react-redux/native';
 import Event from './Event';
 import { deleteEventAction, editEventAction } from '../actions/uiActions';
-import {
-  List
-} from 'material-ui';
 import moment from 'moment';
+const {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+} = React;
 
-class Day extends Component {
+class Day extends React.Component {
   constructor() {
     super();
     this.menuItems = [
@@ -19,6 +21,7 @@ class Day extends Component {
   }
 
   _handleEventDelete(id) {
+    console.log(id);
     this.props.dispatch(deleteEventAction(id));
   }
 
@@ -50,44 +53,38 @@ class Day extends Component {
   render() {
     const dayData = this.getDayData();
     return (
-      <div>
-        <div className="list">
-          <List subheader='today'>
-            {dayData.today.map((item, index) => {
-              return <Event
-                key={item._id}
-                {...item}
-                handleEventDelete={this._handleEventDelete.bind(this)}
-                handleEventEdit={this._handleEventEdit.bind(this)}
-              />;
-            })}
-          </List>
-        </div>
-        <div className="list">
-          <List subheader='tomorrow'>
-            {dayData.tomorrow.map((item, index) => {
-              return <Event
-                key={item._id}
-                {...item}
-                handleEventDelete={this._handleEventDelete.bind(this)}
-                handleEventEdit={this._handleEventEdit.bind(this)}
-              />;
-            })}
-          </List>
-        </div>
-        <div className="list">
-          <List subheader='day after tomorrow'>
-            {dayData.dayAfterTomorrow.map((item, index) => {
-              return <Event
-                key={item._id}
-                {...item}
-                handleEventDelete={this._handleEventDelete.bind(this)}
-                handleEventEdit={this._handleEventEdit.bind(this)}
-              />;
-            })}
-          </List>
-        </div>
-      </div>
+      <View>
+        <View>
+          {dayData.today.map((item, index) => {
+            return <Event
+              key={item._id}
+              {...item}
+              handleEventDelete={this._handleEventDelete.bind(this)}
+              handleEventEdit={this._handleEventEdit.bind(this)}
+            />;
+          })}
+        </View>
+        <View>
+          {dayData.tomorrow.map((item, index) => {
+            return <Event
+              key={item._id}
+              {...item}
+              handleEventDelete={this._handleEventDelete.bind(this)}
+              handleEventEdit={this._handleEventEdit.bind(this)}
+            />;
+          })}
+        </View>
+        <View>
+          {dayData.dayAfterTomorrow.map((item, index) => {
+            return <Event
+              key={item._id}
+              {...item}
+              handleEventDelete={this._handleEventDelete.bind(this)}
+              handleEventEdit={this._handleEventEdit.bind(this)}
+            />;
+          })}
+        </View>
+      </View>
     );
   }
 }

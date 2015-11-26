@@ -108,17 +108,54 @@ function select(state) {
 */
 import React from 'react-native';
 import { connect } from 'react-redux/native';
-import TabBar from '../components/TabBar';
+import Footer from '../components/Footer';
+import Day from '../components/Day';
+import {
+  dayViewAction,
+  monthViewAction,
+  allViewAction
+} from '../actions/uiActions';
 const {
   StyleSheet,
   Text,
   View,
+  ScrollView,
 } = React;
 
 class App extends React.Component {
+  handleDayView() {
+    this.props.dispatch(dayViewAction());
+  }
+
+  handleMonthView() {
+    this.props.dispatch(monthViewAction());
+  }
+
+  handleAllView() {
+    this.props.dispatch(allViewAction());
+  }
+
+  getView() {
+    const {ui} = this.props;
+    if(ui.view === 'day') {
+      return <Day />;
+    } else if(ui.view === 'month') {
+      return <Month />;
+    }
+  }
+
   render() {
     return (
-      <TabBar />
+      <View style={ styles.container }>
+        <ScrollView>
+          { this.getView() }
+        </ScrollView>
+        <Footer
+          dayView={this.handleDayView.bind(this)}
+          monthView={this.handleMonthView.bind(this)}
+          allView={this.handleAllView.bind(this)}
+        />
+      </View>
     );
   }
 };
@@ -132,9 +169,7 @@ function select(state) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
   },
   welcome: {
     fontSize: 20,
