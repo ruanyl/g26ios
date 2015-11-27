@@ -123,6 +123,10 @@ const {
 } = React;
 
 class App extends React.Component {
+  componentDidMount() {
+    this.props.dispatch(dayViewAction());
+  }
+
   handleDayView() {
     this.props.dispatch(dayViewAction());
   }
@@ -147,7 +151,7 @@ class App extends React.Component {
   render() {
     return (
       <View style={ styles.container }>
-        <ScrollView>
+        <ScrollView style={styles.content }>
           { this.getView() }
         </ScrollView>
         <Footer
@@ -170,6 +174,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  content: {
+    backgroundColor: '#eee',
   },
   welcome: {
     fontSize: 20,

@@ -51,17 +51,44 @@ export default class Event extends React.Component {
 
   render() {
     return (
-      <Swipeout
-        right={ this.getRight() }
-        autoClose={ true }
-        >
-        <View>
-          <Text>{this.props.title}</Text>
-          <Text>{this.props.content}</Text>
-          <Text>{moment(this.props.start).format('MM/DD H:m')} to {moment(this.props.end).format('MM/DD H:m')}</Text>
-        </View>
-      </Swipeout>
+      <View style={ styles.listWrap }>
+        <Swipeout
+          right={ this.getRight() }
+          autoClose={ true }
+          backgroundColor='#fff'
+          >
+          <View style={ styles.item }>
+            <Text style={ styles.itemTitle }>{this.props.title}</Text>
+            <Text style={ styles.itemContent }>{this.props.content}</Text>
+            <Text style={ styles.itemTime }>{moment(this.props.start).format('MM/DD H:m')} to {moment(this.props.end).format('MM/DD H:m')}</Text>
+          </View>
+        </Swipeout>
+      </View>
     );
   }
 
 }
+
+var styles = StyleSheet.create({
+  listWrap: {
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+    backgroundColor: '#fff',
+  },
+  item: {
+    padding: 5,
+    marginLeft: 10,
+  },
+  itemTitle: {
+    fontSize: 13,
+    color: '#666',
+  },
+  itemContent: {
+    fontSize: 11,
+    color: '#999',
+  },
+  itemTime: {
+    fontSize: 11,
+    color: '#9c9c9c',
+  },
+});
