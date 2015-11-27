@@ -110,6 +110,7 @@ import React from 'react-native';
 import { connect } from 'react-redux/native';
 import Footer from '../components/Footer';
 import Day from '../components/Day';
+import Header from '../components/Header';
 import {
   dayViewAction,
   monthViewAction,
@@ -139,6 +140,20 @@ class App extends React.Component {
     this.props.dispatch(allViewAction());
   }
 
+  handleAddView() {
+    this.props.dispatch(toggleAddViewAction());
+  }
+
+  handleSync() {
+    GoogleApi((gapi) => {
+      this.gapi = gapi;
+      gapi.auth.authorize(
+        {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+        this.handleAuthResult.bind(this)
+      );
+    });
+  }
+
   getView() {
     const {ui} = this.props;
     if(ui.view === 'day') {
@@ -151,6 +166,10 @@ class App extends React.Component {
   render() {
     return (
       <View style={ styles.container }>
+        <Header
+          sync={ this.handleSync.bind(this) }
+          addView={ this.handleAddView.bind(this) }
+        />
         <ScrollView style={styles.content }>
           { this.getView() }
         </ScrollView>
