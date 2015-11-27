@@ -2,6 +2,7 @@ import request from 'superagent';
 
 export const DAY_VIEW = 'DAY_VIEW';
 export const MONTH_VIEW = 'MONTH_VIEW';
+export const ALL_VIEW = 'ALL_VIEW';
 export const TOGGLE_ADD_VIEW = 'TOGGLE_ADD_VIEW';
 export const DAY_DATA_RECEIVE = 'DAY_DATA_RECEIVE';
 export const MONTH_DATA_RECEIVE = 'MONTH_DATA_RECEIVE';
@@ -51,6 +52,12 @@ function _monthViewAction() {
   };
 }
 
+function _allViewAction() {
+  return {
+    type: ALL_VIEW
+  };
+}
+
 export function toggleAddViewAction() {
   return {
     type: TOGGLE_ADD_VIEW
@@ -87,7 +94,7 @@ export function monthViewAction() {
 
 export function allViewAction() {
   return dispatch => {
-    dispatch(_monthViewAction());
+    dispatch(_allViewAction());
     return request.get(API_ENDPOINT + '/event')
     .end(function(err, res) {
       if(res && res.status !== 'error') {

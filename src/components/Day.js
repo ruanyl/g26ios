@@ -58,7 +58,7 @@ class Day extends React.Component {
           <View style={ styles.dividerWrap }>
             <Text style={ styles.divider }>TODAY</Text>
           </View>
-          {dayData.today.map((item, index) => {
+          {dayData.today.map((item) => {
             return <Event
               key={item._id}
               {...item}
@@ -71,7 +71,7 @@ class Day extends React.Component {
           <View style={ styles.dividerWrap }>
             <Text style={ styles.divider }>TOMOTTOW</Text>
           </View>
-          {dayData.tomorrow.map((item, index) => {
+          {dayData.tomorrow.map((item) => {
             return <Event
               key={item._id}
               {...item}
@@ -84,7 +84,7 @@ class Day extends React.Component {
           <View style={ styles.dividerWrap }>
             <Text style={ styles.divider }>DAY AFTER TOMORROW</Text>
           </View>
-          {dayData.dayAfterTomorrow.map((item, index) => {
+          {dayData.dayAfterTomorrow.map((item) => {
             return <Event
               key={item._id}
               {...item}

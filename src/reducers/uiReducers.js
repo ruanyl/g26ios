@@ -1,6 +1,7 @@
 import {
   DAY_VIEW,
   MONTH_VIEW,
+  ALL_VIEW,
   TOGGLE_ADD_VIEW,
   DAY_DATA_RECEIVE,
   MONTH_DATA_RECEIVE,
@@ -32,6 +33,8 @@ export function uiState(state = viewState, action) {
       return Object.assign({}, state, {view: 'day'});
     case MONTH_VIEW:
       return Object.assign({}, state, {view: 'month'});
+    case ALL_VIEW:
+      return Object.assign({}, state, {view: 'all'});
     case TOGGLE_ADD_VIEW:
       const showAdd = !state.showAdd;
       return Object.assign({}, state, {showAdd: showAdd});

@@ -110,6 +110,8 @@ import React from 'react-native';
 import { connect } from 'react-redux/native';
 import Footer from '../components/Footer';
 import Day from '../components/Day';
+import Month from '../components/Month';
+import All from '../components/All';
 import Header from '../components/Header';
 import {
   dayViewAction,
@@ -160,6 +162,8 @@ class App extends React.Component {
       return <Day />;
     } else if(ui.view === 'month') {
       return <Month />;
+    } else if(ui.view === 'all') {
+      return <All />;
     }
   }
 
@@ -174,9 +178,10 @@ class App extends React.Component {
           { this.getView() }
         </ScrollView>
         <Footer
-          dayView={this.handleDayView.bind(this)}
-          monthView={this.handleMonthView.bind(this)}
-          allView={this.handleAllView.bind(this)}
+          dayView={ this.handleDayView.bind(this) }
+          monthView={ this.handleMonthView.bind(this) }
+          allView={ this.handleAllView.bind(this) }
+          currentView={ this.props.ui.view }
         />
       </View>
     );

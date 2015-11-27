@@ -10,7 +10,7 @@ const {
   ScrollView,
 } = React;
 
-class Month extends React.Component {
+class All extends React.Component {
   _handleEventDelete(id) {
     this.props.dispatch(deleteEventAction(id));
   }
@@ -24,7 +24,7 @@ class Month extends React.Component {
     return (
       <View style={{ backgroundColor: '#eee' }}>
         <View style={ styles.dividerWrap }>
-          <Text style={ styles.divider }>Event of This Month</Text>
+          <Text style={ styles.divider }>All Event</Text>
         </View>
         { ui.data.map((item) => {
           return <Event
@@ -56,4 +56,4 @@ var styles = StyleSheet.create({
 
 export default connect(state => ({
   ui: state.uiState
-}))(Month);
+}))(All);

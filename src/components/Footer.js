@@ -9,27 +9,28 @@ var {
 
 class Footer extends React.Component {
   render() {
+    const { currentView } = this.props;
     return (
       <View style={ styles.container }>
         <TouchableOpacity
           style={ styles.item }
           onPress={ this.props.dayView }>
           <View>
-            <Text style={ styles.textHighlight }>DAY</Text>
+            <Text style={ currentView === 'day' ? styles.textHighlight : styles.text }>DAY</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={ styles.item }
           onPress={ this.props.monthView }>
           <View>
-            <Text style={ styles.text }>Month</Text>
+            <Text style={ currentView === 'month' ? styles.textHighlight : styles.text }>Month</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={ styles.item }
           onPress={ this.props.allView }>
           <View>
-            <Text style={ styles.text }>ALL</Text>
+            <Text style={ currentView === 'all' ? styles.textHighlight : styles.text }>ALL</Text>
           </View>
         </TouchableOpacity>
       </View>
