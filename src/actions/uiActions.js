@@ -152,29 +152,15 @@ function _syncedToDbAction(data) {
   };
 }
 
-export function syncToDbAction(events) {
-  events = events.map((event) => {
-    return {
-      title: event.summary,
-      content: event.description,
-      start: new Date(event.start.dateTime),
-      end: new Date(event.end.dateTime),
-      googleId: event.id
-    };
-  });
-  console.log(events);
-
+export function syncToDbAction() {
   return dispatch => {
-    events.forEach((event) => {
-      request.post(API_ENDPOINT + '/event/sync')
-      .send(event)
-      .end((err, res) => {
-        if(res && res.status !== 'error') {
-          dispatch(_syncedToDbAction(event));
-        } else {
-          dispatch(_dataNotReceiveAction());
-        }
-      });
+    return request.get(API_ENDPOINT + '/event/sync/google')
+    .end((err, res) => {
+      if(res && res.status !== 'error') {
+        dispatch(_syncedToDbAction(res.data));
+      } else {
+        dispatch(_dataNotReceiveAction());
+      }
     });
   };
 }
