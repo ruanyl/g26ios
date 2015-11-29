@@ -11,14 +11,6 @@ const {
 export default class Event extends React.Component {
   constructor(props) {
     super(props);
-    this.event = {
-      _id: this.props._id,
-      title: this.props.title,
-      content: this.props.content,
-      priority: this.props.priority,
-      start: this.props.start,
-      end: this.props.end
-    };
     this.priorityMapping = {
       '1': 'Low',
       '2': 'Medium',
@@ -27,7 +19,15 @@ export default class Event extends React.Component {
   }
 
   _handleEventEdit() {
-    this.props.handleEventEdit(this.event);
+    const event = {
+      _id: this.props._id,
+      title: this.props.title,
+      content: this.props.content,
+      priority: this.props.priority,
+      start: this.props.start,
+      end: this.props.end
+    };
+    this.props.handleEventEdit(event);
   }
 
   _handleEventDelete() {
@@ -51,7 +51,7 @@ export default class Event extends React.Component {
   }
 
   _onItemClick() {
-    console.log(this.event);
+    //console.log(this.event);
   }
 
   render() {

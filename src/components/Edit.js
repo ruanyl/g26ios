@@ -16,23 +16,36 @@ const {
   TextInput,
 } = React;
 
-export default class Add extends React.Component {
+class Edit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      _id: props.editData._id,
       showStart: false,
       showEnd: false,
-      title: '',
-      content: '',
-      priority: '',
-      start: new Date(),
-      end: new Date(),
+      title: props.editData.title,
+      content: props.editData.content,
+      priority: props.editData.priority,
+      start: props.editData.start,
+      end: props.editData.end,
     };
   }
 
+  componentWillReceiveProps(nextPorps) {
+    this.setState({
+      _id: nextPorps.editData._id,
+      title: nextPorps.editData.title,
+      content: nextPorps.editData.content,
+      priority: nextPorps.editData.priority,
+      start: new Date(nextPorps.editData.start),
+      end: new Date(nextPorps.editData.end),
+    });
+  }
+
   _handleSaveEvent() {
-    let { title, content, priority, start, end } = this.state;
-    this.props.onSave({
+    let { _id, title, content, priority, start, end } = this.state;
+    this.props.onUpdate({
+      _id,
       title,
       content,
       priority,
@@ -42,26 +55,26 @@ export default class Add extends React.Component {
     this.setState({
       showStart: false,
       showEnd: false,
-      title: '',
-      content: '',
-      priority: '',
-      start: new Date(),
-      end: new Date(),
     });
   }
 
   _handleCloseAddView() {
+    this.setState({
+      showStart: false,
+      showEnd: false,
+    });
     this.props.onClose();
   }
 
   render() {
+    let { editData } = this.props;
     return (
       <Modal
         visible={ this.props.visible }
         animated={ true }>
         <View style={ styles.header }>
           <Text style={{ color: 'white' }}>
-            Add an Event
+            Edit an Event
           </Text>
         </View>
         <ScrollView style={{ flex: 1 }}>
@@ -108,7 +121,7 @@ export default class Add extends React.Component {
           <TouchableOpacity
             onPress={ () => this._handleSaveEvent() }>
             <View style={ [styles.button, styles.buttonSave] }>
-              <Text style={{ color: 'white' }}>Save</Text>
+              <Text style={{ color: 'white' }}>Update</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -160,3 +173,10 @@ var styles = StyleSheet.create({
     paddingLeft: 15,
   }
 });
+
+function select(state) {
+  return {
+    editData: state.addData,
+  };
+}
+export default connect(select)(Edit);

@@ -5,6 +5,7 @@ export const MONTH_VIEW = 'MONTH_VIEW';
 export const ALL_VIEW = 'ALL_VIEW';
 export const OPEN_ADD_VIEW = 'OPEN_ADD_VIEW';
 export const CLOSE_ADD_VIEW = 'CLOSE_ADD_VIEW';
+export const CLOSE_EDIT_VIEW = 'CLOSE_EDIT_VIEW';
 export const DAY_DATA_RECEIVE = 'DAY_DATA_RECEIVE';
 export const MONTH_DATA_RECEIVE = 'MONTH_DATA_RECEIVE';
 export const DATA_NOT_RECEIVE = 'DATA_NOT_RECEIVE';
@@ -68,6 +69,12 @@ export function openAddViewAction() {
 export function closeAddViewAction() {
   return {
     type: CLOSE_ADD_VIEW
+  };
+}
+
+export function closeEditViewAction() {
+  return {
+    type: CLOSE_EDIT_VIEW
   };
 }
 

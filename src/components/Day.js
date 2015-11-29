@@ -21,7 +21,6 @@ class Day extends React.Component {
   }
 
   _handleEventDelete(id) {
-    console.log(id);
     this.props.dispatch(deleteEventAction(id));
   }
 

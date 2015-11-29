@@ -112,6 +112,7 @@ import Footer from '../components/Footer';
 import Day from '../components/Day';
 import Month from '../components/Month';
 import All from '../components/All';
+import Edit from '../components/Edit';
 import Add from '../components/Add';
 import Header from '../components/Header';
 import {
@@ -120,6 +121,7 @@ import {
   allViewAction,
   openAddViewAction,
   closeAddViewAction,
+  closeEditViewAction,
 } from '../actions/uiActions';
 import {
   saveAction,
@@ -159,12 +161,18 @@ class App extends React.Component {
   }
 
   render() {
+    let { ui } = this.props;
     return (
       <View style={ styles.container }>
         <Add
-          visible={ this.props.ui.showAdd }
+          visible={ ui.showAdd }
           onSave={ (event) => this.props.dispatch(saveAction(event)) }
           onClose={ () => this.props.dispatch(closeAddViewAction()) }
+        />
+        <Edit
+          visible={ !ui.showAdd && ui.showEdit }
+          onUpdate={ (event) => this.props.dispatch(updateAction(event)) }
+          onClose={ () => this.props.dispatch(closeEditViewAction()) }
         />
         <Header
           sync={ this.handleSync.bind(this) }
@@ -177,7 +185,7 @@ class App extends React.Component {
           dayView={ () => this.props.dispatch(dayViewAction()) }
           monthView={ () => this.props.dispatch(monthViewAction()) }
           allView={ () => this.props.dispatch(allViewAction()) }
-          currentView={ this.props.ui.view }
+          currentView={ ui.view }
         />
       </View>
     );
@@ -186,7 +194,7 @@ class App extends React.Component {
 
 function select(state) {
   return {
-    ui: state.uiState
+    ui: state.uiState,
   };
 }
 

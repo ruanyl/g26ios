@@ -4,6 +4,7 @@ import {
   ALL_VIEW,
   OPEN_ADD_VIEW,
   CLOSE_ADD_VIEW,
+  CLOSE_EDIT_VIEW,
   DAY_DATA_RECEIVE,
   MONTH_DATA_RECEIVE,
   DATA_NOT_RECEIVE,
@@ -22,6 +23,7 @@ import {
 const viewState = {
   view: 'day',
   showAdd: false,
+  showEdit: false,
   isSaving: false,
   isSaved: true,
   dataError: false,
@@ -40,6 +42,8 @@ export function uiState(state = viewState, action) {
       return Object.assign({}, state, {showAdd: true});
     case CLOSE_ADD_VIEW:
       return Object.assign({}, state, {showAdd: false});
+    case CLOSE_EDIT_VIEW:
+      return Object.assign({}, state, {showEdit: false});
     case SAVING:
       return Object.assign({}, state, {isSaving: true});
     case SAVED:
@@ -47,7 +51,7 @@ export function uiState(state = viewState, action) {
       savedData.data.push(action.event);
       return savedData;
     case UPDATED:
-      let updatedData = Object.assign({}, state, {isSaving: false, isSaved: true});
+      let updatedData = Object.assign({}, state, { isSaving: false, isSaved: true, showEdit: false });
       updatedData.data = updatedData.data.map(function(event) {
         let result = event._id === action.event._id ? action.event : event;
         return result;
@@ -69,7 +73,7 @@ export function uiState(state = viewState, action) {
       });
       return Object.assign({}, state, {data: data});
     case EDIT_EVENT:
-      return Object.assign({}, state, {showAdd: true});
+      return Object.assign({}, state, {showEdit: true});
     case SYNCED_TO_DB:
       return Object.assign({}, state);
     default:
