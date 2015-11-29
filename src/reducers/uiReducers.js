@@ -2,7 +2,8 @@ import {
   DAY_VIEW,
   MONTH_VIEW,
   ALL_VIEW,
-  TOGGLE_ADD_VIEW,
+  OPEN_ADD_VIEW,
+  CLOSE_ADD_VIEW,
   DAY_DATA_RECEIVE,
   MONTH_DATA_RECEIVE,
   DATA_NOT_RECEIVE,
@@ -35,13 +36,14 @@ export function uiState(state = viewState, action) {
       return Object.assign({}, state, {view: 'month'});
     case ALL_VIEW:
       return Object.assign({}, state, {view: 'all'});
-    case TOGGLE_ADD_VIEW:
-      const showAdd = !state.showAdd;
-      return Object.assign({}, state, {showAdd: showAdd});
+    case OPEN_ADD_VIEW:
+      return Object.assign({}, state, {showAdd: true});
+    case CLOSE_ADD_VIEW:
+      return Object.assign({}, state, {showAdd: false});
     case SAVING:
       return Object.assign({}, state, {isSaving: true});
     case SAVED:
-      let savedData = Object.assign({}, state, {isSaving: false, isSaved: true});
+      let savedData = Object.assign({}, state, { isSaving: false, isSaved: true, showAdd: false });
       savedData.data.push(action.event);
       return savedData;
     case UPDATED:

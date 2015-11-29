@@ -112,12 +112,19 @@ import Footer from '../components/Footer';
 import Day from '../components/Day';
 import Month from '../components/Month';
 import All from '../components/All';
+import Add from '../components/Add';
 import Header from '../components/Header';
 import {
   dayViewAction,
   monthViewAction,
-  allViewAction
+  allViewAction,
+  openAddViewAction,
+  closeAddViewAction,
 } from '../actions/uiActions';
+import {
+  saveAction,
+  updateAction,
+} from '../actions/addActions';
 const {
   StyleSheet,
   Text,
@@ -130,34 +137,18 @@ class App extends React.Component {
     this.props.dispatch(dayViewAction());
   }
 
-  handleDayView() {
-    this.props.dispatch(dayViewAction());
-  }
-
-  handleMonthView() {
-    this.props.dispatch(monthViewAction());
-  }
-
-  handleAllView() {
-    this.props.dispatch(allViewAction());
-  }
-
-  handleAddView() {
-    this.props.dispatch(toggleAddViewAction());
-  }
-
   handleSync() {
     GoogleApi((gapi) => {
       this.gapi = gapi;
       gapi.auth.authorize(
-        {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+        { client_id: CLIENT_ID, scope: SCOPES, immediate: false },
         this.handleAuthResult.bind(this)
       );
     });
   }
 
   getView() {
-    const {ui} = this.props;
+    const { ui } = this.props;
     if(ui.view === 'day') {
       return <Day />;
     } else if(ui.view === 'month') {
@@ -170,17 +161,22 @@ class App extends React.Component {
   render() {
     return (
       <View style={ styles.container }>
+        <Add
+          visible={ this.props.ui.showAdd }
+          onSave={ (event) => this.props.dispatch(saveAction(event)) }
+          onClose={ () => this.props.dispatch(closeAddViewAction()) }
+        />
         <Header
           sync={ this.handleSync.bind(this) }
-          addView={ this.handleAddView.bind(this) }
+          addView={ () => this.props.dispatch(openAddViewAction()) }
         />
         <ScrollView style={styles.content }>
           { this.getView() }
         </ScrollView>
         <Footer
-          dayView={ this.handleDayView.bind(this) }
-          monthView={ this.handleMonthView.bind(this) }
-          allView={ this.handleAllView.bind(this) }
+          dayView={ () => this.props.dispatch(dayViewAction()) }
+          monthView={ () => this.props.dispatch(monthViewAction()) }
+          allView={ () => this.props.dispatch(allViewAction()) }
           currentView={ this.props.ui.view }
         />
       </View>

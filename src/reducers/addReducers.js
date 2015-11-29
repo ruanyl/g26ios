@@ -10,7 +10,6 @@ import {
   UPDATED
 } from '../actions/addActions';
 import {
-  TOGGLE_ADD_VIEW,
   EDIT_EVENT
 } from '../actions/uiActions';
 
@@ -47,8 +46,6 @@ export function addData(state = addState, action) {
       return Object.assign({}, state, addState);
     case EDIT_EVENT:
       return Object.assign({}, state, action.event); // better that date and time be the same as event
-    case TOGGLE_ADD_VIEW:
-      return Object.assign({}, state, addState); // when click add button, reset the state of add view to defaul
     default:
       return state;
   }
