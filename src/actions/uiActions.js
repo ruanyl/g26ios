@@ -157,7 +157,7 @@ export function syncToDbAction() {
     return request.get(API_ENDPOINT + '/event/sync/google')
     .end((err, res) => {
       if(res && res.status !== 'error') {
-        dispatch(_syncedToDbAction(res.data));
+        dispatch(dayViewAction());
       } else {
         dispatch(_dataNotReceiveAction());
       }
