@@ -1,10 +1,4 @@
 import React from 'react-native';
-import { connect } from 'react-redux/native';
-import {
-  saveAction,
-  updateAction,
-} from '../actions/addActions';
-import moment from 'moment';
 const {
   StyleSheet,
   Text,
@@ -31,7 +25,7 @@ export default class Add extends React.Component {
   }
 
   _handleSaveEvent() {
-    let { title, content, priority, start, end } = this.state;
+    const { title, content, priority, start, end } = this.state;
     this.props.onSave({
       title,
       content,
@@ -93,7 +87,7 @@ export default class Add extends React.Component {
             <TextInput
               style={ styles.inputText }
               value={ this.state.title }
-              placeholder="Input title here"
+              placeholder='Input title here'
               onChangeText={ (text) => this.setState({ title: text }) }
             />
           </View>
@@ -101,7 +95,7 @@ export default class Add extends React.Component {
             <TextInput
               style={ styles.inputText }
               value={ this.state.content }
-              placeholder="Input Content here"
+              placeholder='Input Content here'
               onChangeText={ (text) => this.setState({ content: text }) }
             />
           </View>
@@ -158,5 +152,5 @@ var styles = StyleSheet.create({
   inputText: {
     height: 30,
     paddingLeft: 15,
-  }
+  },
 });

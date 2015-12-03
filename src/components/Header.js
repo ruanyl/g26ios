@@ -1,6 +1,4 @@
 import React from 'react-native';
-import moment from 'moment';
-import Swipeout from 'react-native-swipeout';
 const {
   StyleSheet,
   Text,
@@ -51,5 +49,5 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
 });

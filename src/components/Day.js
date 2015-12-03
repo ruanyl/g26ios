@@ -7,7 +7,6 @@ const {
   StyleSheet,
   Text,
   View,
-  ScrollView,
 } = React;
 
 class Day extends React.Component {
@@ -29,21 +28,21 @@ class Day extends React.Component {
   }
 
   getDayData() {
-    let dayData = {
+    const dayData = {
       today: [],
       tomorrow: [],
-      dayAfterTomorrow: []
+      dayAfterTomorrow: [],
     };
     this.props.uiState.data.forEach(function(current) {
-      if(moment(current.start).isAfter(moment().startOf('day')) &&
-        moment(current.start).isBefore(moment().endOf('day'))) {
-          dayData.today.push(current);
-      } else if(moment(current.start).isAfter(moment().startOf('day').add(1, 'd')) &&
-        moment(current.start).isBefore(moment().endOf('day').add(1, 'd'))) {
-          dayData.tomorrow.push(current);
-      } else if(moment(current.start).isAfter(moment().startOf('day').add(2, 'd')) &&
-        moment(current.start).isBefore(moment().endOf('day').add(2, 'd'))) {
-          dayData.dayAfterTomorrow.push(current);
+      if(moment(current.start).isAfter(moment().startOf('day'))
+        && moment(current.start).isBefore(moment().endOf('day'))) {
+        dayData.today.push(current);
+      } else if(moment(current.start).isAfter(moment().startOf('day').add(1, 'd'))
+        && moment(current.start).isBefore(moment().endOf('day').add(1, 'd'))) {
+        dayData.tomorrow.push(current);
+      } else if(moment(current.start).isAfter(moment().startOf('day').add(2, 'd'))
+        && moment(current.start).isBefore(moment().endOf('day').add(2, 'd'))) {
+        dayData.dayAfterTomorrow.push(current);
       }
     });
     return dayData;
@@ -102,7 +101,7 @@ var styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold',
     padding: 8,
-    color: '#333'
+    color: '#333',
   },
   dividerWrap: {
     marginLeft: 10,
@@ -117,5 +116,5 @@ var styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  uiState: state.uiState
+  uiState: state.uiState,
 }))(Day);

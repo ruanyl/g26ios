@@ -2,12 +2,10 @@ import React from 'react-native';
 import { connect } from 'react-redux/native';
 import Event from './Event';
 import { deleteEventAction, editEventAction } from '../actions/uiActions';
-import moment from 'moment';
 const {
   StyleSheet,
   Text,
   View,
-  ScrollView,
 } = React;
 
 class Month extends React.Component {
@@ -44,7 +42,7 @@ var styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold',
     padding: 8,
-    color: '#333'
+    color: '#333',
   },
   dividerWrap: {
     marginTop: 10,
@@ -55,5 +53,5 @@ var styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-  ui: state.uiState
+  ui: state.uiState,
 }))(Month);

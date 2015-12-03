@@ -4,5 +4,5 @@ import {addData} from './addReducers';
 
 export default combineReducers({
   uiState,
-  addData
+  addData,
 });

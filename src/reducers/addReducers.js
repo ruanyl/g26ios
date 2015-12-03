@@ -1,9 +1,5 @@
-import {
-  UPDATED
-} from '../actions/addActions';
-import {
-  EDIT_EVENT
-} from '../actions/uiActions';
+import { UPDATED } from '../actions/addActions';
+import { EDIT_EVENT } from '../actions/uiActions';
 
 const addState = {
   _id: '',

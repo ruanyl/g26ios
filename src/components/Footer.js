@@ -4,7 +4,6 @@ var {
   Text,
   View,
   TouchableOpacity,
-  Image,
 } = React;
 
 class Footer extends React.Component {

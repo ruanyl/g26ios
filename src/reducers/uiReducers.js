@@ -11,13 +11,13 @@ import {
   DELETE_EVENT,
   EDIT_EVENT,
   SYNCED_TO_DB,
-  ALL_DATA_RECEIVE
+  ALL_DATA_RECEIVE,
 } from '../actions/uiActions';
 import {
   SAVING,
   SAVED,
   UPDATED,
-  NOT_SAVED
+  NOT_SAVED,
 } from '../actions/addActions';
 
 const viewState = {
@@ -27,7 +27,7 @@ const viewState = {
   isSaving: false,
   isSaved: true,
   dataError: false,
-  data: []
+  data: [],
 };
 
 export function uiState(state = viewState, action) {
@@ -47,13 +47,13 @@ export function uiState(state = viewState, action) {
     case SAVING:
       return Object.assign({}, state, {isSaving: true});
     case SAVED:
-      let savedData = Object.assign({}, state, { isSaving: false, isSaved: true, showAdd: false });
+      const savedData = Object.assign({}, state, { isSaving: false, isSaved: true, showAdd: false });
       savedData.data.push(action.event);
       return savedData;
     case UPDATED:
-      let updatedData = Object.assign({}, state, { isSaving: false, isSaved: true, showEdit: false });
+      const updatedData = Object.assign({}, state, { isSaving: false, isSaved: true, showEdit: false });
       updatedData.data = updatedData.data.map(function(event) {
-        let result = event._id === action.event._id ? action.event : event;
+        const result = event._id === action.event._id ? action.event : event;
         return result;
       });
       return updatedData;
@@ -68,7 +68,7 @@ export function uiState(state = viewState, action) {
     case ALL_DATA_RECEIVE:
       return Object.assign({}, state, {dataError: false, data: action.data});
     case DELETE_EVENT:
-      let data = state.data.filter(function(event) {
+      const data = state.data.filter(function(event) {
         return !(action.id === event._id);
       });
       return Object.assign({}, state, {data: data});

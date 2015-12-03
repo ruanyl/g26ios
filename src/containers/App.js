@@ -22,7 +22,6 @@ import {
 } from '../actions/addActions';
 const {
   StyleSheet,
-  Text,
   View,
   ScrollView,
 } = React;
@@ -30,16 +29,6 @@ const {
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(dayViewAction());
-  }
-
-  handleSync() {
-    GoogleApi((gapi) => {
-      this.gapi = gapi;
-      gapi.auth.authorize(
-        { client_id: CLIENT_ID, scope: SCOPES, immediate: false },
-        this.handleAuthResult.bind(this)
-      );
-    });
   }
 
   getView() {
@@ -54,7 +43,7 @@ class App extends React.Component {
   }
 
   render() {
-    let { ui } = this.props;
+    const { ui } = this.props;
     return (
       <View style={ styles.container }>
         <Add
@@ -83,7 +72,7 @@ class App extends React.Component {
       </View>
     );
   }
-};
+}
 
 function select(state) {
   return {

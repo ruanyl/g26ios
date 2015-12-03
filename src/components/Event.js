@@ -5,17 +5,12 @@ const {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
 } = React;
 
 export default class Event extends React.Component {
   constructor(props) {
     super(props);
-    this.priorityMapping = {
-      '1': 'Low',
-      '2': 'Medium',
-      '3': 'High'
-    };
   }
 
   _handleEventEdit() {
@@ -25,7 +20,7 @@ export default class Event extends React.Component {
       content: this.props.content,
       priority: this.props.priority,
       start: this.props.start,
-      end: this.props.end
+      end: this.props.end,
     };
     this.props.handleEventEdit(event);
   }
@@ -38,20 +33,20 @@ export default class Event extends React.Component {
     const right = [
       {
         text: 'Edit',
-        onPress: this._handleEventEdit.bind(this)
+        onPress: this._handleEventEdit.bind(this),
       },
       {
         text: 'Delete',
         backgroundColor: '#F10706',
-        onPress: this._handleEventDelete.bind(this)
-      }
+        onPress: this._handleEventDelete.bind(this),
+      },
     ];
 
     return right;
   }
 
   _onItemClick() {
-    //console.log(this.event);
+    // console.log(this.event);
   }
 
   render() {
@@ -67,7 +62,9 @@ export default class Event extends React.Component {
           <View style={ styles.item }>
             <Text style={ styles.itemTitle }>{this.props.title}</Text>
             <Text style={ styles.itemContent }>{this.props.content}</Text>
-            <Text style={ styles.itemTime }>{moment(this.props.start).format('MM/DD H:m')} to {moment(this.props.end).format('MM/DD H:m')}</Text>
+            <Text style={ styles.itemTime }>
+              { moment(this.props.start).format('MM/DD H:m')} to {moment(this.props.end).format('MM/DD H:m') }
+            </Text>
           </View>
         </TouchableOpacity>
       </Swipeout>

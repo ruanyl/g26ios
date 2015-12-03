@@ -1,10 +1,5 @@
 import React from 'react-native';
 import { connect } from 'react-redux/native';
-import {
-  saveAction,
-  updateAction,
-} from '../actions/addActions';
-import moment from 'moment';
 const {
   StyleSheet,
   Text,
@@ -43,7 +38,7 @@ class Edit extends React.Component {
   }
 
   _handleSaveEvent() {
-    let { _id, title, content, priority, start, end } = this.state;
+    const { _id, title, content, priority, start, end } = this.state;
     this.props.onUpdate({
       _id,
       title,
@@ -67,7 +62,6 @@ class Edit extends React.Component {
   }
 
   render() {
-    let { editData } = this.props;
     return (
       <Modal
         visible={ this.props.visible }
@@ -106,7 +100,7 @@ class Edit extends React.Component {
             <TextInput
               style={ styles.inputText }
               value={ this.state.title }
-              placeholder="Input title here"
+              placeholder='Input title here'
               onChangeText={ (text) => this.setState({ title: text }) }
             />
           </View>
@@ -114,7 +108,7 @@ class Edit extends React.Component {
             <TextInput
               style={ styles.inputText }
               value={ this.state.content }
-              placeholder="Input Content here"
+              placeholder='Input Content here'
               onChangeText={ (text) => this.setState({ content: text }) }
             />
           </View>
@@ -171,7 +165,7 @@ var styles = StyleSheet.create({
   inputText: {
     height: 30,
     paddingLeft: 15,
-  }
+  },
 });
 
 function select(state) {

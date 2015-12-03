@@ -13,68 +13,68 @@ export const EDIT_EVENT = 'EDIT_EVENT';
 export const DELETE_EVENT = 'DELETE_EVENT';
 export const SYNCED_TO_DB = 'SYNCED_TO_DB';
 export const ALL_DATA_RECEIVE = 'ALL_DATA_RECEIVE';
-const API_ENDPOINT = 'http://localhost:3000';
+const API_ENDPOINT = 'http://10.100.0.110:3000';
 
 function _dayViewAction() {
   return {
-    type: DAY_VIEW
+    type: DAY_VIEW,
   };
 }
 
 function _dayDataReceiveAction(data) {
   return {
     type: DAY_DATA_RECEIVE,
-    data
+    data,
   };
 }
 
 function _monthDataReceiveAction(data) {
   return {
     type: MONTH_DATA_RECEIVE,
-    data
+    data,
   };
 }
 
 function _allDataReceiveAction(data) {
   return {
     type: ALL_DATA_RECEIVE,
-    data
+    data,
   };
 }
 
 function _dataNotReceiveAction() {
   return {
-    type: DATA_NOT_RECEIVE
+    type: DATA_NOT_RECEIVE,
   };
 }
 
 function _monthViewAction() {
   return {
-    type: MONTH_VIEW
+    type: MONTH_VIEW,
   };
 }
 
 function _allViewAction() {
   return {
-    type: ALL_VIEW
+    type: ALL_VIEW,
   };
 }
 
 export function openAddViewAction() {
   return {
-    type: OPEN_ADD_VIEW
+    type: OPEN_ADD_VIEW,
   };
 }
 
 export function closeAddViewAction() {
   return {
-    type: CLOSE_ADD_VIEW
+    type: CLOSE_ADD_VIEW,
   };
 }
 
 export function closeEditViewAction() {
   return {
-    type: CLOSE_EDIT_VIEW
+    type: CLOSE_EDIT_VIEW,
   };
 }
 
@@ -85,7 +85,7 @@ export function dayViewAction() {
     .end(function(err, res) {
       if(res && res.status !== 'error') {
         dispatch(_dayDataReceiveAction(res.body));
-      } else {
+      } else if(err) {
         dispatch(_dataNotReceiveAction());
       }
     });
@@ -99,7 +99,7 @@ export function monthViewAction() {
     .end(function(err, res) {
       if(res && res.status !== 'error') {
         dispatch(_monthDataReceiveAction(res.body));
-      } else {
+      } else if(err) {
         dispatch(_dataNotReceiveAction());
       }
     });
@@ -113,7 +113,7 @@ export function allViewAction() {
     .end(function(err, res) {
       if(res && res.status !== 'error') {
         dispatch(_allDataReceiveAction(res.body));
-      } else {
+      } else if(err) {
         dispatch(_dataNotReceiveAction());
       }
     });
@@ -123,14 +123,14 @@ export function allViewAction() {
 export function editEventAction(event) {
   return {
     type: EDIT_EVENT,
-    event
+    event,
   };
 }
 
 function _deleteEventAction(id) {
   return {
     type: DELETE_EVENT,
-    id
+    id,
   };
 }
 
@@ -140,15 +140,10 @@ export function deleteEventAction(id) {
     .end(function(err, res) {
       if(res && res.status !== 'error') {
         dispatch(_deleteEventAction(id));
+      } else if(err) {
+        dispatch(_dataNotReceiveAction());
       }
     });
-  };
-}
-
-function _syncedToDbAction(data) {
-  return {
-    type: SYNCED_TO_DB,
-    data
   };
 }
 
@@ -158,7 +153,7 @@ export function syncToDbAction() {
     .end((err, res) => {
       if(res && res.status !== 'error') {
         dispatch(dayViewAction());
-      } else {
+      } else if(err) {
         dispatch(_dataNotReceiveAction());
       }
     });
